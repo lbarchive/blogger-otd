@@ -1,2 +1,41 @@
 #summary How to install this plugin
 #labels Featured
+
+You need two things from Google:
+# Google AJAX Feed API Key
+# Your blog's ID on Blogger.com
+
+Assuming your blog URI is `http://myblog.blogspot.com/`
+
+=Steps=
+==Code Generator==
+Please open this [http://www.livibetter.com/page/onthisday.htm generator page] in new window. It help you to get the code for template on Blogger.com.
+
+==Get Google AJAX Feed API Key==
+Please open this [http://code.google.com/apis/ajaxfeeds/signup.html signup page] in new window.
+
+Input your blog URI, and you have to agree the terms, of course.
+
+Copy the key and paste to generator.
+
+==Get your blog's ID==
+Enter [http://www.blogger.com/home Blogger Dashboard]
+
+Move your cursor over the link New Post, right click and copy the link, it looks like
+
+`http://www.blogger.com/post-create.g?blogID=4075414619052280424`
+
+The numeric string is your blog's ID. Copy it to the generator.
+
+==Get the Code==
+Now, you can click the Generate button in generator unless you want to adjust some of options.
+
+There are two code fragments. One for head section, another for sidebar section.
+
+==Paste to head section==
+Go to Template/Edit HTML of your blog.
+
+Find `</head>`, then paste head fragment just before `</head>`.
+
+==Paste to sidebar section==
+Find `<div id='sidebar-wrapper'>` and next `</div>` follows it, then paste sidebar fragment just before this `</div>`.
