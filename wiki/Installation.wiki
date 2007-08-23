@@ -1,0 +1,2 @@
+#summary How to install this plugin
+#labels Featured
