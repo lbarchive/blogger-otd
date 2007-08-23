@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+    <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+        <title>On this day for Blogger - Code Generator</title>
+        <style>
+            body{
+                /*margin: 0px;*/
+                background-color: LightCyan;
+                font-family: Arial;
+                font-size: 1em;
+                }
+            div#sidebar {
+                width: 200px;
+                float: right;
+                }
+            a{
+                text-decoration: none;
+                }
+            textarea{
+                border: 1px solid black;
+                }
+            fieldset {
+                border: none;
+                }
+            fieldset label,
+            fieldset input {
+                display: block;
+                float: left;
+                margin-bottom: 10px; 
+                }
+            fieldset label {
+                text-align: right;
+                width: 200px;
+                padding-right: 20px;
+                }
+            fieldset input{
+                border: 1px solid RoyalBlue;
+                background-color: Coral;
+                font-size: 1em;
+                color: Blue;
+                }
+            br.clear{
+                clear: both;
+                }
+            div#sidebar ul {
+                padding-left: 16px;
+                }
+        </style>
+        <script type="text/javascript">
+            function GetPair(id) {
+                var key = document.getElementById(id);
+                if (key.value != "")
+                    return "&amp;" + id + "=" + escape(key.value);
+                return "";
+                }
+            function Generate() {
+                var headCode = document.getElementById("headCode");
+                headCode.value = '<link type="text\/css" href="http:\/\/http:\/\/livibetter.googlepages.com\/onthisday.css" rel="stylesheet" >\n';
+                headCode.value += '<script type="text\/javascript" src="http:\/\/www.google.com\/jsapi?key=' + document.getElementById("apiKey").value + '"><\/script>\n';
+                headCode.value += '<script type="text\/javascript" src="http:\/\/livibetter.googlepages.com\/jquery.js"><\/script>\n';
+                var qs = "";
+                qs += GetPair("blogID");
+                qs += GetPair("targetID");
+                qs += GetPair("timezone");
+                qs += GetPair("limitPosts");
+                qs += GetPair("limitYears");
+                qs += GetPair("loadingMsg");
+                qs += GetPair("errorMsg");
+                qs += GetPair("noPostMsg");
+                if (qs.length > 0)
+                    qs = '?' + qs.substring(5);
+                headCode.value += '<script type="text\/javascript" src="http:\/\/livibetter.googlepages.com\/onthisday.js' + encodeURI(qs) + '"><\/script>';
+
+                var sidebarCode = document.getElementById("sidebarCode");
+                sidebarCode.value = '<h2>On this day...<\/h2>\n';
+                sidebarCode.value += '<div id="' + document.getElementById("targetID").value + '"/>';
+                }
+        </script>
+    </head>
+<body>
+<div class="wrap">
+    <h1>On this day for Blogger - Code Generator</h1>
+
+    <div id="sidebar">
+        <h2>About</h2>
+        This project is written by <a href="http://www.livibetter.com/">Yu-Jie Lin</a> and licensed under GPL v3.
+        <h2>Related Links</h2>
+        <ul>
+            <li><a href="http://code.google.com/p/blogger-otd/">Project's website</a></li>
+            <li><a href="http://groups.google.com/group/otd-for-blogger/">Get Support</a></li>
+        </ul>
+    </div>
+
+    <h2>Settings</h2>
+    <fieldset>
+        <label for="apiKey">Google AJAX Feed API Key</label>
+        <input type="text" id="apiKey"/>
+        <br class="clear"/>
+
+        <label for="blogID">Blog ID</label>
+        <input type="text" id="blogID"/>
+        <br class="clear"/>
+    
+        <label for="targetID">Target Div ID</label>
+        <input type="text" id="targetID" value="feed"/>
+        <br class="clear"/>
+
+        <label><strong>Optional</strong></label>
+        <br class="clear"/>
+
+        <label for="timezone">Timezone</label>
+        <input type="text" id="timezone" value=""/> e.g. -08:00
+        <br class="clear"/>
+
+        <label for="limitPosts">Posts Limit</label>
+        <input type="text" id="limitPosts" value=""/> e.g. 5
+        <br class="clear"/>
+
+        <label for="limitYears">Years Limit</label>
+        <input type="text" id="limitYears" value=""/> e.g. 5
+        <br class="clear"/>
+
+        <label for="loadingMsg">Loading Message</label>
+        <input type="text" id="loadingMsg" value=""/> e.g. Loading..., 讀取中…
+        <br class="clear"/>
+
+        <label for="errorMsg">Error Message</label>
+        <input type="text" id="errorMsg" value=""/> e.g. Something went wrong!, 無法完成讀取！
+        <br class="clear"/>
+
+        <label for="noPostMsg">No Post Message</label>
+        <input type="text" id="noPostMsg" value=""/> e.g. No post on this day., 本日無文章
+        <br class="clear"/>
+
+        <label></label>
+        <input type="button" value="Generate" onclick="Generate()"/>
+    </fieldset>
+    
+    <h2>Code</h2>
+    <h3>head</h3>
+    <textarea id="headCode" cols="80" rows="5"></textarea>
+    <h3>sidebar</h3>
+    <textarea id="sidebarCode" cols="80" rows="5"></textarea>
+</div>
+</body>
+</html>
