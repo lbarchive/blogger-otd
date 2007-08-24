@@ -24,7 +24,6 @@ var OTD_JS_NAME = "onthisday.js";
 
 var OTDblogID = "4075414619052280424";
 var OTDtargetID = "feed";
-var OTDtimezone = "-08:00";
 var OTDlimitPosts = 5;
 var OTDlimitYears = 5;
 
@@ -51,9 +50,6 @@ function OTDLoad() {
                         break;
                     case "targetID":
                         OTDtargetID = kv[key];
-                        break;
-                    case "timezone":
-                        OTDtimezone = kv[key];
                         break;
                     case "limitPosts":
                         OTDlimitPosts = kv[key];
@@ -101,8 +97,8 @@ function OTDGetQueryURI(year) {
     var today = new Date();
     var dateString = OTDGetDateString(year.toString(), today.getMonth() + 1, today.getDate());
     var queryURI = "http:\/\/www.blogger.com\/feeds\/" + OTDblogID + 
-                   "\/posts\/default?published-min=" + dateString + "T00:00:00" + OTDtimezone + "&" + 
-                                    "published-max=" + dateString + "T23:59:59" + OTDtimezone;
+                   "\/posts\/default?published-min=" + dateString + "T00:00:00&" + 
+                                    "published-max=" + dateString + "T23:59:59";
     return queryURI;
     }
 
