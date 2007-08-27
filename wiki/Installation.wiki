@@ -37,5 +37,14 @@ Go to Template/Edit HTML of your blog.
 
 Find `</head>`, then paste head fragment just before `</head>`.
 
-==Paste to sidebar section==
+==sidebar section==
+There are two ways to insert the OTD list into your sidebar:
+===Add HTML/Javascript===
+  # Go to Template/Page Elements.
+  # Click "Add a Page Element" at sidebar.
+  # Choose "HTML/Javascript".
+  # Input the title, e.g. On this day...
+  # Paste second line of sidebar code fragment from generator, e.g. `<div id="feed"></div>`.
+
+===Paste to sidebar section===
 Find `<div id='sidebar-wrapper'>` and next `</div>` follows it, then paste sidebar fragment just before this `</div>`.
