@@ -63,6 +63,8 @@
                 var qs = "";
                 qs += GetPair("blogID");
                 qs += GetPair("targetID");
+                qs += GetPair("timezone");
+                qs += GetPair("excludeThisYear");
                 qs += GetPair("limitPosts");
                 qs += GetPair("limitYears");
                 qs += GetPair("loadingMsg");
@@ -90,6 +92,15 @@
             <li><a href="http://code.google.com/p/blogger-otd/">Project's website</a></li>
             <li><a href="http://groups.google.com/group/otd-for-blogger/">Get Support</a></li>
         </ul>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <div>
+        <input type="hidden" name="cmd" value="_s-xclick"/>
+        <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but21.gif" style="border:0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+        "/>
+        </div>
+        </form>
     </div>
 
     <h2>Settings</h2>
@@ -109,12 +120,20 @@
         <label><strong>Optional</strong></label>
         <br class="clear"/>
 
+        <label for="timezone">Timezone</label>
+        <input type="text" id="timezone" value=""/> e.g. -08:00
+        <br class="clear"/>
+
         <label for="limitPosts">Posts Limit</label>
         <input type="text" id="limitPosts" value=""/> e.g. 5
         <br class="clear"/>
 
         <label for="limitYears">Years Limit</label>
         <input type="text" id="limitYears" value=""/> e.g. 5
+        <br class="clear"/>
+
+        <label for="excludeThisYear">Exclude posts from current year</label>
+        <input type="text" id="excludeThisYear" value=""/> e.g. true, false
         <br class="clear"/>
 
         <label for="loadingMsg">Loading Message</label>

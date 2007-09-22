@@ -1,6 +1,12 @@
 OTD for Blogger CHANGES
 =======================
 
+OTD for Blogger 0.2 (09/22/2007)
+--------------------------------
+Fixed: timezone problem.
+Added: #1 - Current year's posts exclusion - new parameter `excludeThisYear`.
+Moded: #2 - Replace jQuery with 1.1.4 - 1.2.1.
+
 OTD for Blogger 0.1.1 (08/25/2007)
 ----------------------------------
 Fixed: timezone problem.

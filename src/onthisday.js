@@ -26,6 +26,8 @@ var OTDblogID = "4075414619052280424";
 var OTDtargetID = "feed";
 var OTDlimitPosts = 5;
 var OTDlimitYears = 5;
+var OTDtimezone = "-08:00";
+var OTDexcludeThisYear = false;
 
 var OTD_LOADING = "Loading...";
 var OTD_ERROR = "Something went wrong!";
@@ -33,6 +35,7 @@ var OTD_NO_POST = "No post on this day!";
 
 var OTDcount = 0;
 var OTDqueryYear = 0;
+var OTDsecondsOffset = 0;
 
 function OTDLoad() {
     // Get parameters
@@ -57,6 +60,12 @@ function OTDLoad() {
                     case "limitYears":
                         OTDlimitYears = kv[key];
                         break;
+                    case "timezone":
+                        OTDtimezone = kv[key];
+                        break;
+                    case "excludeThisYear":
+                        OTDexcludeThisYear = Boolean(kv[key]);
+                        break;
                     case "loadingMsg":
                         OTD_LOADING = kv[key];
                         break;
@@ -68,6 +77,11 @@ function OTDLoad() {
                         break;
                         }
                     }
+                // Processing timezone
+                OTDsecondsOffset += Number(OTDtimezone.substring(1, 3)) * 3600 * 1000;
+                OTDsecondsOffset += Number(OTDtimezone.substring(4, 6)) * 60 * 1000;
+                if (OTDtimezone.charAt(0) == '+')
+                    OTDsecondsOffset *= -1;
                 // Load OTD list
                 OTDList();
                 }
@@ -86,19 +100,26 @@ function ParseQueryString(qs) {
     return result;
     }
 
-function OTDGetDateString(year, month, date) {
-    year = year.toString();
-    month = ((month<10)?'0':'') + month.toString();
-    date  = (( date<10)?'0':'') +  date.toString();
-    return year + '-' + month + '-' + date;
+function OTDGetDateString(year, month, dayOfMonth, hours, minutes, seconds) {
+    var date = Date.UTC(year, month, dayOfMonth, hours, minutes, seconds);
+    date += OTDsecondsOffset;
+    date = new Date(date);
+    year = date.getUTCFullYear().toString();
+    month = ((date.getUTCMonth()<10)?'0':'') + date.getUTCMonth().toString();
+    dayOfMonth  = ((date.getUTCDate()<10)?'0':'') +  date.getUTCDate().toString();
+    hours = ((date.getUTCHours()<10)?'0':'') + date.getUTCHours().toString();
+    minutes  = ((date.getUTCMinutes()<10)?'0':'') +  date.getUTCMinutes().toString();
+    seconds  = ((date.getUTCSeconds()<10)?'0':'') +  date.getUTCSeconds().toString();
+    return year + '-' + month + '-' + dayOfMonth + 'T' + hours + ':' + minutes + ':' + seconds;
     }
 
 function OTDGetQueryURI(year) {
     var today = new Date();
-    var dateString = OTDGetDateString(year.toString(), today.getMonth() + 1, today.getDate());
+    // The date tag is UTC
     var queryURI = "http:\/\/www.blogger.com\/feeds\/" + OTDblogID + 
-                   "\/posts\/default?published-min=" + dateString + "T00:00:00&" + 
-                                    "published-max=" + dateString + "T23:59:59";
+                   "\/posts\/default?published-min=" + OTDGetDateString(year, today.getMonth() + 1, today.getDate(), 0, 0, 0) + '&' +
+                                    "published-max=" + OTDGetDateString(year, today.getMonth() + 1, today.getDate(), 23, 59, 59);
+
     return queryURI;
     }
 
@@ -107,6 +128,9 @@ function OTDList() {
     // Prepare for querying
     var today = new Date();
     OTDqueryYear = today.getFullYear();
+    // Exclude this year?
+    if (OTDexcludeThisYear) OTDqueryYear--;
+    
     var queryURI = OTDGetQueryURI(OTDqueryYear);
     var feed = new google.feeds.Feed(queryURI);
     feed.load(OTDFeedProcess);
