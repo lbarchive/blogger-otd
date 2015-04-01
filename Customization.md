@@ -1,0 +1,1 @@
+You can modify http://livibetter.googlepages.com/onthisday.css, then upload modified version to your own space and change the stylesheet link at head section.
